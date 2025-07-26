@@ -69,6 +69,7 @@
 
 BEGIN_FUNC(arm64_elX_to_el1)
 	/* LAB 1 TODO 1 BEGIN */
+	mrs x9, CurrentEL
 	/* BLANK BEGIN */
 	/* BLANK END */
 	/* LAB 1 TODO 1 END */
@@ -88,6 +89,10 @@ BEGIN_FUNC(arm64_elX_to_el1)
 
 	// Set the return address and exception level.
 	/* LAB 1 TODO 2 BEGIN */
+	ldr x0, =_start
+	msr elr_el3, x0
+	mov x0, #0x3c5
+	msr spsr_el3, x0
 	/* BLANK BEGIN */
 	/* BLANK END */
 	/* LAB 1 TODO 2 END */
