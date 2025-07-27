@@ -91,7 +91,7 @@ BEGIN_FUNC(arm64_elX_to_el1)
 	/* LAB 1 TODO 2 BEGIN */
 	ldr x0, =_start
 	msr elr_el3, x0
-	mov x0, #0x3c5
+	mov x0, SPSR_ELX_DAIF | SPSR_ELX_EL1H
 	msr spsr_el3, x0
 	/* BLANK BEGIN */
 	/* BLANK END */
@@ -271,6 +271,7 @@ BEGIN_FUNC(el1_mmu_activate)
 	mrs     x8, sctlr_el1
 	/* Enable MMU */
 	/* LAB 1 TODO 4 BEGIN */
+	orr		x8, x8, #SCTLR_EL1_M
 	/* BLANK BEGIN */
 	/* BLANK END */
 	/* LAB 1 TODO 4 END */
