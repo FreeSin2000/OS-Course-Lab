@@ -89,7 +89,7 @@ BEGIN_FUNC(arm64_elX_to_el1)
 
 	// Set the return address and exception level.
 	/* LAB 1 TODO 2 BEGIN */
-	ldr x9, =_start
+	adr x9, .Ltarget 
 	msr elr_el3, x9
 	mov x9, SPSR_ELX_DAIF | SPSR_ELX_EL1H
 	msr spsr_el3, x9
