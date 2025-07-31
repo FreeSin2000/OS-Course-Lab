@@ -71,7 +71,7 @@ __maybe_unused static struct page *split_chunk(struct phys_mem_pool *__maybe_unu
 
         cur_order = buddy_chunk->order;
         free_list = &(pool->free_lists[cur_order].free_list);
-        list_append(&(buddy_chunk->node), free_list);
+        list_add(&(buddy_chunk->node), free_list);
         list_entry(free_list, struct free_list, free_list)->nr_free++;
 
         return split_chunk(pool, order, chunk);
@@ -224,7 +224,7 @@ void buddy_free_pages(struct phys_mem_pool *pool, struct page *page)
         page = merge_chunk(pool, page);
         order = page->order;
         free_list = &(pool->free_lists[order].free_list);
-        list_append(&(page->node), free_list);
+        list_add(&(page->node), free_list);
         list_entry(free_list, struct free_list, free_list)->nr_free++;
 
         /* BLANK END */
