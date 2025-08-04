@@ -310,7 +310,6 @@ void free_in_slab(void *addr)
          */
         /* BLANK BEGIN */
 
-        UNUSED(slot);
         struct slab_slot_list *cur_slot = (struct slab_slot_list *)slab->free_list_head;
         while(cur_slot) {
                 if(!cur_slot->next_free || cur_slot->next_free > (void *)slot) {
