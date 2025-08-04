@@ -316,6 +316,7 @@ void free_in_slab(void *addr)
                 if(!cur_slot->next_free || cur_slot->next_free > (void *)slot) {
                         slot->next_free = cur_slot->next_free;
                         cur_slot->next_free = (void *)slot;
+                        slab->current_free_cnt += 1;
                         break;
                 }
                 cur_slot = cur_slot->next_free;
