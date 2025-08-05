@@ -135,7 +135,6 @@ static int get_next_ptp(ptp_t *cur_ptp, u32 level, vaddr_t va, ptp_t **next_ptp,
 
         if (cur_ptp == NULL)
                 return -ENOMAPPING;
-
         switch (level) {
         case L0:
                 index = GET_L0_INDEX(va);
@@ -181,6 +180,8 @@ static int get_next_ptp(ptp_t *cur_ptp, u32 level, vaddr_t va, ptp_t **next_ptp,
 
                         /* same effect as: cur_ptp->ent[index] = new_pte_val; */
                         entry->pte = new_pte_val.pte;
+                        if(rss)
+                                *rss += PAGE_SIZE;
                 }
         }
 
@@ -460,6 +461,8 @@ static int try_release_ptp(ptp_t *high_ptp, ptp_t *low_ptp, int index,
 
         BUG_ON(index < 0 || index >= PTP_ENTRIES);
         high_ptp->ent[index].pte = PTE_DESCRIPTOR_INVALID;
+        if(rss)
+                *rss -= PAGE_SIZE;
         kfree(low_ptp);
 
         return 1;

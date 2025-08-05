@@ -260,6 +260,7 @@ TEST_SUITE(lab2, test_pm_usage)
                 ret = map_range_in_pgtbl(
                         pgtbl, 0x1001000, 0x1000, PAGE_SIZE, flags, &rss);
 #ifdef CHCORE_KERNEL_PM_USAGE_TEST
+                printk("rss %d %d\n", rss, rss / PAGE_SIZE);
                 ASSERT(rss == PAGE_SIZE * (3 + 1));
 #endif
 
@@ -303,6 +304,7 @@ TEST_SUITE(lab2, test_pm_usage)
                 ASSERT(ret == 0);
 #ifdef CHCORE_KERNEL_PM_USAGE_TEST
                 ASSERT(rss_1 == PAGE_SIZE * (3 + nr_pages));
+                printk("rss_r %d %d\n", rss_2, rss_2);
                 ASSERT(rss_2 == PAGE_SIZE * (nr_pages));
 #endif
 
